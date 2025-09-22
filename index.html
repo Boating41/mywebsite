@@ -3,275 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mini Amazon</title>
+  <title>Click the Happy Face Game</title>
   <style>
-    /* Basic reset */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    /* Header styles */
-    header {
-      background-color: #131921;
-      color: white;
-      padding: 10px 20px;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f8ff;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
-
-    header .logo {
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
     }
-
-    header nav a {
-      color: white;
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: 600;
+    #game {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      grid-gap: 15px;
+      margin: 20px 0;
     }
-
-    header nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* Search bar */
-    .search-bar {
-      flex-grow: 1;
-      margin: 0 20px;
-      display: flex;
-    }
-
-    .search-bar input[type="text"] {
-      flex-grow: 1;
-      padding: 8px;
-      border: none;
-      border-radius: 4px 0 0 4px;
-      font-size: 16px;
-    }
-
-    .search-bar button {
-      padding: 8px 16px;
-      background-color: #febd69;
-      border: none;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    /* Cart icon */
-    .cart {
-      position: relative;
-      cursor: pointer;
-      margin-left: 20px;
-      font-size: 24px;
-    }
-
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -12px;
-      background-color: #f08804;
-      color: white;
-      font-weight: bold;
-      font-size: 12px;
-      border-radius: 50%;
-      padding: 2px 6px;
-    }
-
-    /* Main content */
-    main {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 0 20px;
-    }
-
-    /* Featured banner */
-    .banner {
-      width: 100%;
-      height: 300px;
-      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-      border-radius: 8px;
-      margin-bottom: 40px;
-      position: relative;
-      color: white;
+    .box {
+      width: 80px;
+      height: 80px;
+      background-color: #add8e6;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 36px;
-      font-weight: bold;
-      text-shadow: 0 0 10px rgba(0,0,0,0.7);
-    }
-
-    /* Products grid */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .product-card {
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: white;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .product-card:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      margin-bottom: 12px;
-    }
-
-    .product-title {
-      font-size: 16px;
-      margin-bottom: 8px;
-      flex-grow: 1;
-    }
-
-    .product-price {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 12px;
-      color: #b12704;
-    }
-
-    .add-to-cart-btn {
-      background-color: #f0c14b;
-      border: 1px solid #a88734;
-      padding: 8px;
-      border-radius: 4px;
+      font-size: 48px;
       cursor: pointer;
-      font-weight: 600;
-      text-align: center;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .box.active {
+      background-color: #ffd54f;
+      cursor: pointer;
+      animation: pulse 0.6s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    #scoreboard {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    #timer {
+      font-size: 18px;
+      color: #555;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
       transition: background-color 0.3s ease;
     }
-
-    .add-to-cart-btn:hover {
-      background-color: #ddb347;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 60px;
-      background-color: #232f3e;
-      color: white;
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 14px;
-    }
-
-    /* Responsive adjustments */
-    @media(max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .search-bar {
-        margin: 10px 0 0 0;
-        width: 100%;
-      }
-
-      .cart {
-        margin-left: 0;
-        margin-top: 10px;
-      }
+    button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">Mini Amazon</div>
-    <nav>
-      <a href="#">Today's Deals</a>
-      <a href="#">Customer Service</a>
-      <a href="#">Gift Cards</a>
-      <a href="#">Registry</a>
-      <a href="#">Sell</a>
-    </nav>
-    <div class="search-bar">
-      <input type="text" placeholder="Search for products" />
-      <button>Search</button>
-    </div>
-    <div class="cart" title="Shopping Cart">
-      🛒
-      <div class="cart-count" id="cart-count">0</div>
-    </div>
-  </header>
-
-  <main>
-    <div class="banner">
-      Great Deals Every Day!
-    </div>
-
-    <section class="products">
-      <div class="product-card">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/71g2ednj0JL._AC_UY327_FMwebp_QL65_.jpg" alt="Wireless Headphones" />
-        <div class="product-title">Wireless Bluetooth Headphones</div>
-        <div class="product-price">$59.99</div>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/61XxY9M2jfL._AC_UL480_FMwebp_QL65_.jpg" alt="Smart Watch" />
-        <div class="product-title">Smart Watch with Fitness Tracker</div>
-        <div class="product-price">$99.99</div>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/71k1pC3RzHL._AC_UL480_FMwebp_QL65_.jpg" alt="Coffee Maker" />
-        <div class="product-title">12-Cup Programmable Coffee Maker</div>
-        <div class="product-price">$45.00</div>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/81WcnNQ-TBL._AC_UL480_FMwebp_QL65_.jpg" alt="Portable Speaker" />
-        <div class="product-title">Portable Bluetooth Speaker</div>
-        <div class="product-price">$39.99</div>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    &copy; 2025 Mini Amazon. All rights reserved.
-  </footer>
+  <h1>Click the Happy Face!</h1>
+  <div id="scoreboard">Score: 0</div>
+  <div id="timer">Time Left: 30s</div>
+  <div id="game">
+    <!-- Boxes will be created by JS -->
+  </div>
+  <button id="startBtn">Start Game</button>
 
   <script>
-    const cartCountEl = document.getElementById('cart-count');
-    let cartCount = 0;
+    const game = document.getElementById('game');
+    const scoreboard = document.getElementById('scoreboard');
+    const timerDisplay = document.getElementById('timer');
+    const startBtn = document.getElementById('startBtn');
 
-    // Attach click event to all Add to Cart buttons
-    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        cartCount++;
-        cartCountEl.textContent = cartCount;
+    const boxCount = 16;
+    let activeBoxIndex = -1;
+    let score = 0;
+    let timeLeft = 30;
+    let gameInterval;
+    let timerInterval;
 
-        // Optional: show a quick alert or toast (simple alert here)
-        alert('Added to cart!');
-      });
+    // Create boxes dynamically
+    for (let i = 0; i < boxCount; i++) {
+      const box = document.createElement('div');
+      box.classList.add('box');
+      box.dataset.index = i;
+      game.appendChild(box);
+    }
+
+    function activateRandomBox() {
+      // Remove active class from previous box
+      if (activeBoxIndex !== -1) {
+        game.children[activeBoxIndex].classList.remove('active');
+        game.children[activeBoxIndex].textContent = '';
+      }
+
+      // Pick a new random box
+      activeBoxIndex = Math.floor(Math.random() * boxCount);
+
+      // Activate the new box with the happy face emoji
+      const box = game.children[activeBoxIndex];
+      box.classList.add('active');
+      box.textContent = '😊';
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 30;
+      scoreboard.textContent = `Score: ${score}`;
+      timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+      startBtn.disabled = true;
+
+      activateRandomBox();
+
+      gameInterval = setInterval(activateRandomBox, 1000);
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+          clearInterval(gameInterval);
+          clearInterval(timerInterval);
+          alert(`Time's up! Your final score is ${score}`);
+          startBtn.disabled = false;
+
+          // Clear active box
+          if (activeBoxIndex !== -1) {
+            game.children[activeBoxIndex].classList.remove('active');
+            game.children[activeBoxIndex].textContent = '';
+          }
+        }
+      }, 1000);
+    }
+
+    // Listen for clicks on boxes
+    game.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('box')) return;
+
+      if (e.target.classList.contains('active')) {
+        score++;
+        scoreboard.textContent = `Score: ${score}`;
+        // Immediately activate a new box after a successful click
+        activateRandomBox();
+      }
     });
+
+    startBtn.addEventListener('click', startGame);
   </script>
 
 </body>
