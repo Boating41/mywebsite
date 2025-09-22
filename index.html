@@ -21,6 +21,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     header .logo {
@@ -62,6 +65,26 @@
       border-radius: 0 4px 4px 0;
       cursor: pointer;
       font-weight: bold;
+    }
+
+    /* Cart icon */
+    .cart {
+      position: relative;
+      cursor: pointer;
+      margin-left: 20px;
+      font-size: 24px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      background-color: #f08804;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+      border-radius: 50%;
+      padding: 2px 6px;
     }
 
     /* Main content */
@@ -166,6 +189,11 @@
         margin: 10px 0 0 0;
         width: 100%;
       }
+
+      .cart {
+        margin-left: 0;
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
@@ -183,6 +211,10 @@
     <div class="search-bar">
       <input type="text" placeholder="Search for products" />
       <button>Search</button>
+    </div>
+    <div class="cart" title="Shopping Cart">
+      🛒
+      <div class="cart-count" id="cart-count">0</div>
     </div>
   </header>
 
@@ -225,6 +257,22 @@
   <footer>
     &copy; 2025 Mini Amazon. All rights reserved.
   </footer>
+
+  <script>
+    const cartCountEl = document.getElementById('cart-count');
+    let cartCount = 0;
+
+    // Attach click event to all Add to Cart buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        cartCount++;
+        cartCountEl.textContent = cartCount;
+
+        // Optional: show a quick alert or toast (simple alert here)
+        alert('Added to cart!');
+      });
+    });
+  </script>
 
 </body>
 </html>
