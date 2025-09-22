@@ -53,3 +53,178 @@
       border: none;
       border-radius: 4px 0 0 4px;
       font-size: 16px;
+    }
+
+    .search-bar button {
+      padding: 8px 16px;
+      background-color: #febd69;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Main content */
+    main {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    /* Featured banner */
+    .banner {
+      width: 100%;
+      height: 300px;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      position: relative;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+
+    /* Products grid */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: white;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+
+    .product-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+      flex-grow: 1;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #b12704;
+    }
+
+    .add-to-cart-btn {
+      background-color: #f0c14b;
+      border: 1px solid #a88734;
+      padding: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #ddb347;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      background-color: #232f3e;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+    }
+
+    /* Responsive adjustments */
+    @media(max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .search-bar {
+        margin: 10px 0 0 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Mini Amazon</div>
+    <nav>
+      <a href="#">Today's Deals</a>
+      <a href="#">Customer Service</a>
+      <a href="#">Gift Cards</a>
+      <a href="#">Registry</a>
+      <a href="#">Sell</a>
+    </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products" />
+      <button>Search</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="banner">
+      Great Deals Every Day!
+    </div>
+
+    <section class="products">
+      <div class="product-card">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/71g2ednj0JL._AC_UY327_FMwebp_QL65_.jpg" alt="Wireless Headphones" />
+        <div class="product-title">Wireless Bluetooth Headphones</div>
+        <div class="product-price">$59.99</div>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/61XxY9M2jfL._AC_UL480_FMwebp_QL65_.jpg" alt="Smart Watch" />
+        <div class="product-title">Smart Watch with Fitness Tracker</div>
+        <div class="product-price">$99.99</div>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/71k1pC3RzHL._AC_UL480_FMwebp_QL65_.jpg" alt="Coffee Maker" />
+        <div class="product-title">12-Cup Programmable Coffee Maker</div>
+        <div class="product-price">$45.00</div>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/81WcnNQ-TBL._AC_UL480_FMwebp_QL65_.jpg" alt="Portable Speaker" />
+        <div class="product-title">Portable Bluetooth Speaker</div>
+        <div class="product-price">$39.99</div>
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Mini Amazon. All rights reserved.
+  </footer>
+
+</body>
+</html>
